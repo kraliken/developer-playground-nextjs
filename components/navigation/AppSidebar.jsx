@@ -1,14 +1,13 @@
+"use client"
+
 import Link from "next/link"
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarSeparator } from "../ui/sidebar"
-import { ChevronUp, Code, User2 } from "lucide-react"
-import { auth } from "@/auth";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "../ui/dropdown-menu";
-import SignOutDropdownItem from "../SignOutDropdownItem";
+import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarSeparator } from "../ui/sidebar"
+import { ChevronUp, Code, LogOut, User2 } from "lucide-react"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { googleAPILinks } from "@/lib/contans";
+import { SignOutAction } from "@/lib/actions/auth";
 
-
-const AppSidebar = async () => {
-
-    const session = await auth();
+const AppSidebar = ({ session }) => {
 
     return (
         <Sidebar collapsible="icon">
@@ -17,7 +16,7 @@ const AppSidebar = async () => {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
-                            <Link href="/">
+                            <Link href="/dashboard">
                                 <Code />
                                 <span>Playground</span>
                             </Link>
@@ -29,7 +28,26 @@ const AppSidebar = async () => {
             <SidebarSeparator className="m-0" />
 
             <SidebarContent>
+                <SidebarGroup>
+                    <SidebarGroupLabel>
+                        Google API
+                    </SidebarGroupLabel>
+                    <SidebarGroupContent>
+                        <SidebarMenu>
+                            {googleAPILinks.map(task => (
+                                <SidebarMenuItem key={task.label}>
+                                    <SidebarMenuButton asChild>
+                                        <Link href={task.href}>
+                                            {task.icon}
+                                            {task.label}
+                                        </Link>
+                                    </SidebarMenuButton>
+                                </SidebarMenuItem>
+                            ))}
 
+                        </SidebarMenu>
+                    </SidebarGroupContent>
+                </SidebarGroup>
             </SidebarContent>
 
             <SidebarFooter>
@@ -43,11 +61,13 @@ const AppSidebar = async () => {
                             </DropdownMenuTrigger>
 
                             <DropdownMenuContent align="end">
-                                <SignOutDropdownItem />
+                                <DropdownMenuItem onClick={() => SignOutAction()}>
+                                    <LogOut />
+                                    Kilépés
+                                </DropdownMenuItem>
                             </DropdownMenuContent>
 
                         </DropdownMenu>
-
                     </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarFooter>

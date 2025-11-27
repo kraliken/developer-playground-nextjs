@@ -6,7 +6,7 @@ const DashboardPage = () => {
             <Card className="max-w-2xl">
                 <CardHeader>
                     <CardTitle className="text-2xl">
-                        Üdv a Developer Playgroundban
+                        Üdv a Developer Playgroundon
                     </CardTitle>
                 </CardHeader>
 
