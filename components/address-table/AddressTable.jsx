@@ -17,8 +17,6 @@ import {
 
 const AddressTable = ({ addresses, columns }) => {
 
-    console.log(addresses);
-
     const table = useReactTable({
         data: addresses,
         columns,
@@ -63,7 +61,7 @@ const AddressTable = ({ addresses, columns }) => {
                     ) : (
                         <TableRow>
                             <TableCell colSpan={columns.length} className="h-24 text-center">
-                                No results.
+                                Nincs adat
                             </TableCell>
                         </TableRow>
                     )}
